@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar [ngStyle]="{'background-image': 'url('+part.logoUrl+')', 'background-color': part.color}">
+  <ion-navbar>
     <ion-title></ion-title>
     
   </ion-navbar>
@@ -15,6 +15,10 @@
 
 
 <ion-content padding>
+  <ion-pane [ngStyle]="{'background-image': 'url('+part.logoUrl+')', 'background-color': part.color}">
+
+
+  </ion-pane>
   <ion-slides>
     <ion-slide>
       <h1><span>Placer le <b>code barre</b> de votre carte</span>

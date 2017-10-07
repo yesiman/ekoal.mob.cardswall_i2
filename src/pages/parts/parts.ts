@@ -25,10 +25,9 @@ export class PartsPage {
 
   private items: any;
   private storageRef: any;
-  private fileTransfer: FileTransferObject = this.transfer.create();
-
-  constructor(public navCtrl: NavController,private sqlsonProvider:SqlsonProvider,private asyncLogo:AsyncLogo,private transfer: FileTransfer,private file: File) {
-    this.storageRef = firebase.storage().ref();
+  
+  constructor(public navCtrl: NavController,private sqlsonProvider:SqlsonProvider,private asyncLogo:AsyncLogo) {
+    //this.storageRef = firebase.storage().ref();
   } 
   
   showPart(item) {

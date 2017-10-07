@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Slides } from 'ionic-angular';
+import { NavController, NavParams, Slides,PanGesture } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { IBeacon } from '@ionic-native/ibeacon';
 
@@ -25,7 +25,7 @@ export class PartPage {
   private part;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private asyncLogo:AsyncLogo,private ibeacon: IBeacon,platform: Platform) {
+    private asyncLogo:AsyncLogo) {
     this.card = navParams.get("card");
     this.part = navParams.get("part");
     
