@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Slides,PanGesture } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { IBeacon } from '@ionic-native/ibeacon';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Storage } from '@ionic/storage';
 import { AsyncLogo } from '../../providers/asyncLogo/asyncLogo';
 /**
  * Generated class for the PartPage page.
@@ -11,10 +12,13 @@ import { AsyncLogo } from '../../providers/asyncLogo/asyncLogo';
  * on Ionic pages and navigation.
  */
 
+//declare var mwbScanner:any; 
+
 @Component({
   selector: 'page-part',
   templateUrl: 'part.html',
 })
+
 export class PartPage {
   
   @ViewChild(Slides) slides: Slides;
@@ -25,7 +29,8 @@ export class PartPage {
   private part;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private asyncLogo:AsyncLogo) {
+    private asyncLogo:AsyncLogo,private barcodeScanner: BarcodeScanner,
+    private storage: Storage) {
     this.card = navParams.get("card");
     this.part = navParams.get("part");
     
@@ -60,14 +65,38 @@ export class PartPage {
         
     }*/
     this.status = "hello";
-      
+    //if (mwbScanner){
+      //mwbScanner.setCallback(function(result){});
+    //}
+    
   }
 
+  
+
+  scan() {
+    //this.barcodeScanner.scan().then((barcodeData) => {
+      // Success! Barcode data is here
+    // }, (err) => {
+         // An error occurred
+     //});
+     //mwbScanner.startScanning(0,4,100,50).then(function(response){
+     //   console.log('show the result here');
+     //   console.log(response);
+        
+        //actual example in home.ts is different
+    //});
+  }
 
   gotoSl(i) {
     this.slides.lockSwipes(false);
     this.slides.slideTo(i,200);
     this.slides.lockSwipes(true);
+    this.storage.set("local/cards/1", 
+      { 
+        lib:"Nouvelle carte",
+        part:this.part.key
+     }
+    );
   }
 
   ionViewDidLoad() {

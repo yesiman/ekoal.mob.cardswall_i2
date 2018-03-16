@@ -36,7 +36,9 @@ export class SqlsonProvider {
     {
       var ref = firebase.database().ref('/' + aRefUrls[reliARefUrls]);
       ref.orderByChild("dateModif").startAt(1).on('child_added', function(snapshot) {
-        that.storage.set(that.getClearPath(snapshot.ref.toString()), snapshot.val());
+        var obj = snapshot.val();
+        obj.key = snapshot.key;
+        that.storage.set(that.getClearPath(snapshot.ref.toString()), obj);
       });
       aRefs.push(ref);
     }

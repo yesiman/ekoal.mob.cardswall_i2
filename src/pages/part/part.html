@@ -14,15 +14,12 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-pane [ngStyle]="{'background-image': 'url('+part.logoUrl+')', 'background-color': part.color}">
-
-
-  </ion-pane>
-  <ion-slides>
+<ion-content [ngStyle]="{'background-image': 'url('+part.logoUrl+')', 'background-color': part.color}">
+  <ion-slides padding style="background-color:white;">
     <ion-slide>
-      <h1><span>Placer le <b>code barre</b> de votre carte</span>
-          <button ion-button round (click)="gotoSl(1)">Saisir manuellement</button></h1>
+      <h1><span>Placer le <b>code barre</b> de votre carte</span></h1>
+      <button ion-button round (click)="scan()">Scanner</button>
+          <button ion-button round (click)="gotoSl(1)">Saisir manuellement</button>
     </ion-slide>
     <ion-slide>
       <h1>Slide 2</h1>

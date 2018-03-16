@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SqlsonProvider } from '../../providers/sqlson/sqlson'
 
-import { PartsPage } from '../../pages/parts/parts';
-import { PartPage } from '../../pages/part/part';
+import { PartsPage } from '../parts/parts';
+import { PartPage } from '../part/part';
 
 @Component({
   selector: 'page-home',
@@ -21,8 +21,16 @@ export class HomePage {
   
   ionViewDidLoad() {
     var that = this;
-    that.sqlsonProvider.find("users/wMniJbwerObmIQjgOhnxtKNqxZX2/cards").then(function (data) {
-      console.log(data);
+    var uri = "";
+    var logedIn = false;
+    if (logedIn)
+    {
+      uri = "users/wMniJbwerObmIQjgOhnxtKNqxZX2/cards";
+    }
+    else {
+      uri = "local/cards";
+    }
+    that.sqlsonProvider.find(uri).then(function (data) {
       that.items = data;
       for (var i = 0;i < that.items.length-1;i++){
         //that.getLogoAsync(that.items[i]);

@@ -1,19 +1,8 @@
 page-home {
     ion-header.header {
-        background: none !important;
         .toolbar{
-            background: none;
-            .toolbar-background{
-                background: none;
-                border-style: none;
-                border-width:0;
-            }
             button{
                 background-color:#00E094;
-                ion-icon:before{
-                    font-weight: bold;
-                    
-                } 
             }
         }
     }

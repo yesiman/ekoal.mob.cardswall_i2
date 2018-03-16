@@ -1,22 +1,27 @@
 page-parts {
-    ion-header {
+    ion-header.header {
         background: none !important;
-        ion-navbar{
-            height: 200px;
-            background-size: 200px !important;
-            background-repeat: no-repeat !important;
-            background-position: center !important;
-        }
+        height: 200px;
         .toolbar{
+            background: none;
             .toolbar-background{
-                background: #00E094;
+                background: none;
                 border-style: none;
                 border-width:0;
-                background-image:url(/assets/images/add_card.png);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: auto 75px;
+            }
+            button{
+                ion-icon:before {
+                    font-weight: bold;  
+                } 
             }
         }
+    }
+    ion-content{
+        background-position-y: 80px !important;
+        background-color: #00E094 !important;
+        background-image:url('../assets/imgs/add_card.png');
+        background-repeat: no-repeat;
+        background-position:top;
+        background-size: 250px;
     }
 }

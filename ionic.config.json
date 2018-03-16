@@ -1,5 +1,8 @@
 {
   "name": "ekoal.mob.cardswall_i2",
   "app_id": "0e877ad9",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

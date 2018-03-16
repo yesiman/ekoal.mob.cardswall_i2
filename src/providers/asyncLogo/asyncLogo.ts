@@ -21,16 +21,16 @@ export class AsyncLogo {
   get(item) {
     var that = this;
     //alert(this.file.applicationStorageDirectory);
-    that.file.checkFile(that.file.applicationStorageDirectory, item.logo).then(
+    that.file.checkFile(that.file.dataDirectory, item.logo).then(
       function(data) {
         if (data)
         {
-          item.logoUrl = that.file.applicationStorageDirectory  + item.logo; 
+          item.logoUrl = that.file.dataDirectory  + item.logo; 
         }
         else {
           that.storageRef.child(item.logo).getDownloadURL().then(function (url) {
             item.logoUrl = url;
-            that.fileTransfer.download(url,that.file.applicationStorageDirectory  + item.logo,true,{})
+            that.fileTransfer.download(encodeURI(url),that.file.dataDirectory  + item.logo,true,{})
             .then((data) => {
               
               // success
@@ -46,7 +46,7 @@ export class AsyncLogo {
     {
       that.storageRef.child(item.logo).getDownloadURL().then(function (url) {
           item.logoUrl = url;
-            that.fileTransfer.download(url,that.file.applicationStorageDirectory  + item.logo,true,{})
+            that.fileTransfer.download(encodeURI(url),that.file.dataDirectory  + item.logo,true,{})
             .then((data) => {
               // success
             }, (err) => {

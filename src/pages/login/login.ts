@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
-
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 import { SqlsonProvider } from '../../providers/sqlson/sqlson'
 /**
  * Generated class for the LoginPage page.
@@ -18,7 +19,7 @@ declare var firebase: any;
 export class LoginPage {
 
   //
-  constructor(public viewCtrl: ViewController,public sqlsonProvider:SqlsonProvider) {
+  constructor(public viewCtrl: ViewController,public sqlsonProvider:SqlsonProvider,private fb: Facebook,private googlePlus: GooglePlus) {
     
   }
 
@@ -26,21 +27,6 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
     //
   }
-  //
-  private fbUserState:any = firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-      
-    } else { 
-      //GET DEVICE ID
-      /*this.sqlsonProvider.initialize(
-        [
-          "parts",
-          "users_anonymous/cards",
-          "users_anonymous/profile",  
-        ]);   
-        this.viewCtrl.dismiss();*/
-    }
-  });
   //
   pass() {
     this.sqlsonProvider.initialize(
@@ -50,27 +36,23 @@ export class LoginPage {
       "users/bim/profile",  
     ]);   
     this.viewCtrl.dismiss();
+    
   };
-  login() {
-    alert("jkl");
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-      // ...
-    }).catch(function(error) {
-      // Handle Errors here.
-      alert(errorCode + errorMessage);
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
-  }
   
+  loginFb() {
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then((res: FacebookLoginResponse) => this.loged(res))
+      .catch(e => function(e) {
+        console.log("error",e);
+        this.loading = false;
+      });
+  }
+  loginGoog() {
+    this.googlePlus.login({})
+    .then(res => this.loged(res))
+    .catch(err => console.error(err));
+  }
+  loged(res){
+    //this.getUserDatas(res, this);
+  }
 }

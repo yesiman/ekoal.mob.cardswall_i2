@@ -1,12 +1,7 @@
 page-part {
     ion-header.header {
         background: none !important;
-        ion-navbar{
-            height: 200px;
-            background-size: 170px !important;
-            background-repeat: no-repeat !important;
-            background-position: center !important;
-        }
+        height: 200px;
         .toolbar{
             background: none;
             .toolbar-background{
@@ -22,6 +17,10 @@ page-part {
         }
     }
     ion-content{
+        background-position-y: 60px !important;
+        background-size: auto 120px !important;
+        background-repeat: no-repeat !important;
+        background-position:top;
         button{
             background-color:#00E094 !important;
         }
