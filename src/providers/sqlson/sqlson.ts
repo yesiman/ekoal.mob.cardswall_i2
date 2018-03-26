@@ -35,7 +35,8 @@ export class SqlsonProvider {
     for (var reliARefUrls = 0; reliARefUrls < aRefUrls.length;reliARefUrls++)
     {
       var ref = firebase.database().ref('/' + aRefUrls[reliARefUrls]);
-      ref.orderByChild("dateModif").startAt(1).on('child_added', function(snapshot) {
+      //ref.orderByChild("dateModif").startAt(1).on('child_added', function(snapshot) {
+      ref.on('child_added', function(snapshot) {
         var obj = snapshot.val();
         obj.key = snapshot.key;
         that.storage.set(that.getClearPath(snapshot.ref.toString()), obj);
@@ -45,6 +46,9 @@ export class SqlsonProvider {
   }
   getClearPath(ref) {
     return ref.replace(this.config.databaseURL,"");
+  }
+  push(collection,obj) {
+    var ref = firebase.database().ref('/' + collection).push(obj);
   }
   findOne(ikey) {
     var that = this;

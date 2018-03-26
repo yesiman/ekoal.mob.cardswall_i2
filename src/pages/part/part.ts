@@ -5,6 +5,8 @@ import { IBeacon } from '@ionic-native/ibeacon';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Storage } from '@ionic/storage';
 import { AsyncLogo } from '../../providers/asyncLogo/asyncLogo';
+import { SqlsonProvider } from '../../providers/sqlson/sqlson';
+import { SharedProvider } from '../../providers/shared/shared';
 /**
  * Generated class for the PartPage page.
  *
@@ -30,9 +32,10 @@ export class PartPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private asyncLogo:AsyncLogo,private barcodeScanner: BarcodeScanner,
-    private storage: Storage) {
+    private storage: Storage,public sqlsonProvider:SqlsonProvider, private shar:SharedProvider) {
     this.card = navParams.get("card");
     this.part = navParams.get("part");
+    console.log(this.part);
     
 // create a new delegate and register it with the native layer
     //let delegate = this.ibeacon.Delegate();
@@ -91,7 +94,8 @@ export class PartPage {
     this.slides.lockSwipes(false);
     this.slides.slideTo(i,200);
     this.slides.lockSwipes(true);
-    this.storage.set("local/cards/1", 
+    
+    this.sqlsonProvider.push("users/"+this.shar.user.uid+"/cards", 
       { 
         lib:"Nouvelle carte",
         part:this.part.key
@@ -100,6 +104,10 @@ export class PartPage {
   }
 
   ionViewDidLoad() {
+
+    let elm = <HTMLElement>document.querySelector("page-part .toolbar-background");
+    elm.style.background = this.part.color;
+
     this.slides.lockSwipes(true);
     this.asyncLogo.get(this.part);
 

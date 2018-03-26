@@ -23,12 +23,13 @@ export class HomePage {
     var that = this;
     var uri = "";
     var logedIn = false;
+    //UID TO PASS IN
     if (logedIn)
     {
       uri = "users/wMniJbwerObmIQjgOhnxtKNqxZX2/cards";
     }
     else {
-      uri = "local/cards";
+      uri = "users/bim/cards";
     }
     that.sqlsonProvider.find(uri).then(function (data) {
       that.items = data;

@@ -13,6 +13,7 @@ import { File } from '@ionic-native/file';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -26,6 +27,8 @@ import { LoginPage } from '../pages/login/login';
 import { IBeacon } from '@ionic-native/ibeacon';
 import { SqlsonProvider } from '../providers/sqlson/sqlson';
 import { AsyncLogo } from '../providers/asyncLogo/asyncLogo';
+import { SharedProvider } from '../providers/shared/shared';
+import { HeaderPartComponent } from '../components/header-part/header-part';
 
 
 @NgModule({
@@ -40,6 +43,7 @@ import { AsyncLogo } from '../providers/asyncLogo/asyncLogo';
     TabsPage,
     LoginPage,
     HomeCardComponent,
+    HeaderPartComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,9 +74,11 @@ import { AsyncLogo } from '../providers/asyncLogo/asyncLogo';
     SplashScreen,
     Facebook,
     GooglePlus,
+    UniqueDeviceID,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SqlsonProvider,
-    AsyncLogo
+    AsyncLogo,
+    SharedProvider
   ]
 })
 export class AppModule {}

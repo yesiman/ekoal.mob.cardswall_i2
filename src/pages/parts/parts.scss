@@ -1,9 +1,13 @@
 page-parts {
     ion-header.header {
-        background: none !important;
-        height: 200px;
-        .toolbar{
-            background: none;
+        ion-navbar.toolbar{
+            min-height: 200px;
+            background-position-y: 80px !important;
+            background-color: #00E094 !important;
+            background-image:url('../assets/imgs/add_card.png');
+            background-repeat: no-repeat;
+            background-position:top;
+            background-size: 250px;
             .toolbar-background{
                 background: none;
                 border-style: none;
@@ -16,12 +20,5 @@ page-parts {
             }
         }
     }
-    ion-content{
-        background-position-y: 80px !important;
-        background-color: #00E094 !important;
-        background-image:url('../assets/imgs/add_card.png');
-        background-repeat: no-repeat;
-        background-position:top;
-        background-size: 250px;
-    }
+    
 }

@@ -19,7 +19,8 @@ export class AsyncLogo {
   }
 
   get(item) {
-    var that = this;
+    if (item.logo){
+      var that = this;
     //alert(this.file.applicationStorageDirectory);
     that.file.checkFile(that.file.dataDirectory, item.logo).then(
       function(data) {
@@ -56,6 +57,11 @@ export class AsyncLogo {
         
         });
     });
+    }
+    else {
+      //DEFAULT IMage
+      return null;
+    }
   }
 
 

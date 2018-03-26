@@ -1,28 +1,7 @@
 page-part {
-    ion-header.header {
-        background: none !important;
-        height: 200px;
-        .toolbar{
-            background: none;
-            .toolbar-background{
-                background: none;
-                border-style: none;
-                border-width:0;
-            }
-            button{
-                ion-icon:before {
-                    font-weight: bold;  
-                } 
-            }
-        }
-    }
-    ion-content{
-        background-position-y: 60px !important;
-        background-size: auto 120px !important;
-        background-repeat: no-repeat !important;
-        background-position:top;
-        button{
-            background-color:#00E094 !important;
+    ion-header{
+        ion-toolbar.cust{
+            padding: 0;
         }
     }
 }

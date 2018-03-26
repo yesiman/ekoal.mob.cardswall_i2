@@ -34,3 +34,14 @@ body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title {
     padding-bottom: 4px;
   }
 }
+
+ion-header.header {
+  ion-navbar
+  {
+    height: 30px;
+    .toolbar{
+      min-height: 90px;
+    }
+  }
+  
+}
