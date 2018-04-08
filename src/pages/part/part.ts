@@ -34,10 +34,10 @@ export class PartPage {
   private region: any;
   private card;
   private part;
-
+  notesModel:String;
 
   private itemAfd: AngularFirestoreDocument<any>;
-  itemCard: Observable<any>;
+  itemCard: any;
 
   private itemsCollection: AngularFirestoreCollection<any>;
   items: Observable<any[]>;
@@ -107,7 +107,7 @@ export class PartPage {
         part:this.part.id
      });
   }
-//
+  //
   scan() {
     this.barcodeScanner.scan().then(barcodeData => {
       if (!barcodeData.cancelled)
@@ -132,6 +132,11 @@ export class PartPage {
     });
   }
 
+  cardDataChange(val) {
+    this.itemAfd.update({notes:this.notesModel});
+  }
+
+
   ionViewDidLoad() {
 
     let elm = <HTMLElement>document.querySelector("page-part .toolbar-background");
@@ -143,9 +148,15 @@ export class PartPage {
     }
     else {
       //
-      alert("users/" + this.shar.user.uid + "/cards/" + this.card.id);
       this.itemAfd = this.afs.collection("users/" + this.shar.user.uid + "/cards/").doc<any>(this.card.id);
-      this.itemCard = this.itemAfd.valueChanges();
+      this.afs.firestore.doc("users/" + this.shar.user.uid + "/cards/" + this.card.id)
+        .get()
+        .then(docSnapshot => {
+          if (docSnapshot.exists) {
+            this.notesModel = docSnapshot.data().notes;
+          }
+      });
+      
       console.log("this.itemCard",this.itemCard);
     }
     this.itemsCollection = this.afs.collection<any>("promos",ref => ref

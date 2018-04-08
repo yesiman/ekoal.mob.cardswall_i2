@@ -1,0 +1,11 @@
+<ion-content>
+  <ion-slides pager (ionSlideDidChange)="pgChange()">
+    <ion-slide  *ngFor="let pagn of parray">
+      <img [src]="pagn.src"/>
+    </ion-slide>
+
+    
+
+  </ion-slides>
+</ion-content>
+  
