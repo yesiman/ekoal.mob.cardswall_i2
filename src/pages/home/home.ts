@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { SqlsonProvider } from '../../providers/sqlson/sqlson'
 
 import { PartsPage } from '../parts/parts';
 import { PartPage } from '../part/part';
+import { SharedProvider } from '../../providers/shared/shared';
+
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  private itemsCollection: AngularFirestoreCollection<any>;
   private items: any;
-  constructor(public navCtrl: NavController,private sqlsonProvider:SqlsonProvider) {
+  constructor(public navCtrl: NavController,
+    private shar:SharedProvider,public afs: AngularFirestore) {
     
   } 
   
@@ -19,23 +23,32 @@ export class HomePage {
     this.navCtrl.push(PartsPage);
   }
   
+  ionViewWillEnter(){
+    
+  }
+
   ionViewDidLoad() {
+    //CHECK IF DATA CHANGE
     var that = this;
     var uri = "";
-    var logedIn = false;
+    
     //UID TO PASS IN
-    if (logedIn)
+    if (this.shar.user.logedIn)
     {
-      uri = "users/wMniJbwerObmIQjgOhnxtKNqxZX2/cards";
+      uri = "users/"+this.shar.user.uid+"/cards";
     }
     else {
-      uri = "users/bim/cards";
+      uri = "users/bim-_s/cards";
     }
-    that.sqlsonProvider.find(uri).then(function (data) {
-      that.items = data;
-      for (var i = 0;i < that.items.length-1;i++){
-        //that.getLogoAsync(that.items[i]);
-      }
+
+    this.itemsCollection = this.afs.collection<any>(uri);
+    this.items = this.itemsCollection.snapshotChanges().map(actions => {       
+      return actions.map(a => { 
+        //let id = a.payload.doc.id;
+        let data = a.payload.doc.data();
+        data.id = a.payload.doc.id;
+        return data;
+      });
     });
     
   }

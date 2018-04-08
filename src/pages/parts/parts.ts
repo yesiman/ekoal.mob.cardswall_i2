@@ -6,8 +6,8 @@ import { File } from '@ionic-native/file';
 
 import { PartPage } from '../../pages/part/part';
 
-import { SqlsonProvider } from '../../providers/sqlson/sqlson';
 import { AsyncLogo } from '../../providers/asyncLogo/asyncLogo';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 
 /**
  * Generated class for the PartsPage page.
@@ -22,11 +22,12 @@ declare var firebase: any;
   templateUrl: 'parts.html',
 })
 export class PartsPage {
-
+  private itemsCollection: AngularFirestoreCollection<any>;
   private items: any;
   private storageRef: any;
   
-  constructor(public navCtrl: NavController,private sqlsonProvider:SqlsonProvider,private asyncLogo:AsyncLogo) {
+  constructor(public navCtrl: NavController,
+    private asyncLogo:AsyncLogo,public afs: AngularFirestore) {
     //this.storageRef = firebase.storage().ref();
   } 
   
@@ -35,12 +36,18 @@ export class PartsPage {
   }
 
   ionViewDidLoad() {
-    var that = this;
-    that.sqlsonProvider.find("parts").then(function (data) {
-      that.items = data;
-      for (var i = 0;i < that.items.length-1;i++){
-        that.asyncLogo.get(that.items[i]);
-      }
+let elm = <HTMLElement>document.querySelector("page-parts .toolbar-background");
+elm.style.background = "#00E094";
+
+    this.itemsCollection = this.afs.collection<any>("parts");
+    this.items = this.itemsCollection.snapshotChanges().map(actions => {       
+      return actions.map(a => {
+        //let id = a.payload.doc.id;
+        let data = a.payload.doc.data();
+        data.id = a.payload.doc.id;
+        this.asyncLogo.get(data);
+        return data;
+      });
     });
   }
 }

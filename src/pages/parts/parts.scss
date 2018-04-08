@@ -1,24 +1,18 @@
 page-parts {
-    ion-header.header {
-        ion-navbar.toolbar{
-            min-height: 200px;
-            background-position-y: 80px !important;
-            background-color: #00E094 !important;
-            background-image:url('../assets/imgs/add_card.png');
-            background-repeat: no-repeat;
-            background-position:top;
-            background-size: 250px;
-            .toolbar-background{
-                background: none;
-                border-style: none;
-                border-width:0;
-            }
-            button{
-                ion-icon:before {
-                    font-weight: bold;  
-                } 
-            }
+    ion-header{
+        ion-toolbar.cust{
+            padding: 0;
         }
     }
+    .item {
+    ion-avatar {
+        width: 100px;
+        background-repeat:no-repeat;
+        background-position: center;
+        background-size: 80% auto;
+        height: 40px;
+        border-radius: 10px;
+    }
+}
     
 }

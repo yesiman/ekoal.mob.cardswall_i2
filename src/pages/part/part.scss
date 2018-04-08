@@ -2,6 +2,24 @@ page-part {
     ion-header{
         ion-toolbar.cust{
             padding: 0;
+            .segment{
+                position:initial;
+                margin-top: 0px;
+                .segment-button{
+                    border:0;
+                    color: #FFF;
+                    max-width: none;
+                    opacity: 1 !important;
+                }
+                .segment-button.segment-activated
+                {
+                    background-color: #00E094 !important;
+                    color: #000;
+                }
+            }
         }
+    }
+    #dbarcode{
+        text-align: center;
     }
 }

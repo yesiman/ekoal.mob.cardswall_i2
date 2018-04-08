@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-
+import { AngularFireStorage } from 'angularfire2/storage';
 /*
   Generated class for the SqlsonProvider provider.
 
@@ -12,10 +12,9 @@ declare var firebase: any;
 
 @Injectable()
 export class AsyncLogo {
-  private storageRef: any;
   private fileTransfer: FileTransferObject = this.transfer.create();  
-  constructor(private transfer: FileTransfer,private file: File) {
-    this.storageRef = firebase.storage().ref();
+  constructor(private transfer: FileTransfer,private file: File,private storage: AngularFireStorage) {
+    
   }
 
   get(item) {
@@ -29,33 +28,38 @@ export class AsyncLogo {
           item.logoUrl = that.file.dataDirectory  + item.logo; 
         }
         else {
-          that.storageRef.child(item.logo).getDownloadURL().then(function (url) {
+          
+          var downloadURL = that.storage.ref(item.logo).getDownloadURL();
+      downloadURL.subscribe(url=>{
+        if(url){
             item.logoUrl = url;
             that.fileTransfer.download(encodeURI(url),that.file.dataDirectory  + item.logo,true,{})
             .then((data) => {
-              
               // success
             }, (err) => {
-              // error
+              
             })
-        }).catch(function (error) {
-          console.log("error",error);
-          });
+        }
+     })
         }
       }
     ).catch(function(err)
     {
-      that.storageRef.child(item.logo).getDownloadURL().then(function (url) {
-          item.logoUrl = url;
+      
+      var downloadURL = that.storage.ref(item.logo).getDownloadURL();
+      downloadURL.subscribe(url=>{
+        if(url){
+            item.logoUrl = url;
             that.fileTransfer.download(encodeURI(url),that.file.dataDirectory  + item.logo,true,{})
             .then((data) => {
               // success
             }, (err) => {
               
             })
-      }).catch(function (error) {
-        
-        });
+        }
+     })
+   
+      
     });
     }
     else {

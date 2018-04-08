@@ -11,21 +11,31 @@
       </ion-navbar>
   <ion-toolbar class="cust">
     <header-part [bgcolor]="part.color"  [logo]="part.logoUrl"></header-part>
+    <ion-segment  *ngIf="card" [(ngModel)]="subTab" [ngStyle]="{'background-color': part.color}">
+        <ion-segment-button value="card">
+          CARTES
+        </ion-segment-button>
+        <ion-segment-button value="notes">
+          NOTES
+        </ion-segment-button>
+        <ion-segment-button (ionSelect)="loadMap()" value="map">
+          INFOS
+        </ion-segment-button>
+        <ion-segment-button (ionSelect)="loadOffres()" value="offers">
+          OFFRES
+        </ion-segment-button>
+      </ion-segment>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="pet">
-      <ion-segment-button value="kittens">
-        Kittens
-      </ion-segment-button>
-      <ion-segment-button value="puppies">
-        Puppies
-      </ion-segment-button>
-    </ion-segment>
+  
 </ion-header>
 
 
 <ion-content>
-  <ion-slides padding style="background-color:white;">
-    <ion-slide>
+    
+
+
+  <ion-slides *ngIf="!card" padding style="background-color:white;">
+    <ion-slide >
       <h1><span>Placer le <b>code barre</b> de votre carte</span></h1>
       <button ion-button round (click)="scan()">Scanner</button>
           <button ion-button round (click)="gotoSl(1)">Saisir manuellement</button>
@@ -38,4 +48,22 @@
     </ion-slide>
   </ion-slides>
   
+  <div id="dbarcode" *ngIf="card && (subTab == 'card')">
+      <ngx-barcode [bc-value]="card.barcode.code" [bc-display-value]="true" [bc-format]="card.barcode.type"></ngx-barcode>
+    </div>
+    <div padding *ngIf="card && (subTab == 'notes')">
+        <h4>Ma liste shopping/mes notes</h4>
+        <textarea>
+
+          {{itemCard.lib}}
+        </textarea>
+    </div>
+    <div id="map_canvas" style="width:100%;height:100%;" *ngIf="card && (subTab == 'map')">
+    </div>
+    <div padding *ngIf="card && (subTab == 'offers')">
+        <h1>Offres</h1>
+        <div  *ngFor="let item of items | async">
+          <button ion-button round (click)="showOffre(item)">Saisir manuellement</button>
+        </div>
+    </div>
 </ion-content>

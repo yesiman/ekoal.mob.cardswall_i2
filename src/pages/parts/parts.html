@@ -6,19 +6,20 @@
 -->
 <ion-header>
 
-  <ion-navbar >
-    <ion-title></ion-title>
+  <ion-navbar  [color]="'#00E094'">
     
   </ion-navbar>
-
+  <ion-toolbar class="cust">
+    <header-parts></header-parts>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="showPart(item)">
-      <ion-avatar item-start>
-        <img [src]="item.logoUrl">
+    <button ion-item *ngFor="let item of items | async" (click)="showPart(item)">
+      <ion-avatar item-start [ngStyle]="{'background-image': 'url('+item.logoUrl+')', 'background-color': item.color}">
+        
       </ion-avatar>
       <h2>{{item.lib}}</h2>
     </button>

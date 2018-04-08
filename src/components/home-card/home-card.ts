@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { SqlsonProvider } from '../../providers/sqlson/sqlson'
 import { NavController } from 'ionic-angular';
 
 import { PartPage } from '../../pages/part/part';
 
 import { AsyncLogo } from '../../providers/asyncLogo/asyncLogo'
+import { AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the HomeCardComponent component.
  *
@@ -18,9 +19,12 @@ import { AsyncLogo } from '../../providers/asyncLogo/asyncLogo'
 export class HomeCardComponent {
   //
   @Input() card: any;
+  private itemDoc: AngularFirestoreDocument<any>;
+  item: Observable<any>;
+  
   part: any = {};
   //
-  constructor(public navCtrl: NavController,private sqlsonProvider:SqlsonProvider,private asyncLogo:AsyncLogo) {
+  constructor(public navCtrl: NavController,private asyncLogo:AsyncLogo,private afs: AngularFirestore) {
 
     
 
@@ -33,11 +37,16 @@ export class HomeCardComponent {
 
   ngOnInit(): void {
     //
-    var that = this;
-    that.sqlsonProvider.findOne("parts/" + that.card.part).then(function (data) {
-      that.part = data;  
-      that.asyncLogo.get(that.part);
+    this.itemDoc = this.afs.collection("parts").doc<any>(this.card.part);
+    this.item = this.itemDoc.valueChanges();
+    
+    this.item.subscribe(data => {
+      this.part = data;  
+      this.asyncLogo.get(data);
     });
+    
+    
+    
   }
   
 }

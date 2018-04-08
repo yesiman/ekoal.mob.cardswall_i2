@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 
 /*
   Generated class for the SharedProvider provider.
@@ -11,7 +10,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class SharedProvider {
 
-  user:any = {};
+  user:any = {
+    logedIn:false
+  };
   constructor() {
     
   }

@@ -1,5 +1,12 @@
 header-part {
     div{
+        height: 160px;
         text-align: center;
+        img{
+            max-height: 80%;
+        }
+    }
+    ion-segment {
+        top:unset !important;
     }
 }
