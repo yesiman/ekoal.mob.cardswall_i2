@@ -34,14 +34,80 @@ body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title {
     padding-bottom: 4px;
   }
 }
+ion-header.light {
+      button {
+          color:#fff !important;
+      }
+}
 
-ion-header.header {
-  ion-navbar
-  {
+ion-header.header { 
+  ion-navbar{
     height: 30px;
     .toolbar{
       min-height: 90px;
     }
+  } 
+}
+
+ion-tabs{
+  .tab-button[aria-selected=true] {
+      background-size: auto 100%;background-repeat: no-repeat;background-position:center;
+      .ion-ios-tabcode,
+      .ion-ios-tabcode-outline,
+      .ion-md-tabcode {
+      content: url('../assets/imgs/tabcode.png');
+      height: 23px;
+      min-width: auto;
+      padding: 6px 4px 2px;
+      opacity: 0.9;
+      }
+      .ion-ios-taboffres,
+      .ion-ios-taboffres-outline,
+      .ion-md-taboffres {
+      content: url('../assets/imgs/taboffres.png');
+      height: 23px;
+      min-width: auto;
+      padding: 6px 4px 2px;
+      opacity: 0.9;
+      }
+      .ion-ios-tabprofil,
+      .ion-ios-tabprofil-outline,
+      .ion-md-tabprofil {
+      content: url('../assets/imgs/tabprofil.png');
+      height: 23px;
+      min-width: auto;
+      padding: 6px 4px 2px;
+      opacity: 0.9;
+      }
   }
-  
+  .tab-button[aria-selected=false] {
+      .ion-ios-tabcode,
+      .ion-ios-tabcode-outline,
+      .ion-md-tabcode {
+      content: url('../assets/imgs/tabcode.png');
+      height: 23px;
+      min-width: auto;
+      padding: 6px 4px 2px;
+      opacity: 0.9;
+      }
+      .ion-ios-taboffres,
+      .ion-ios-taboffres-outline,
+      .ion-md-taboffres {
+      content: url('../assets/imgs/taboffres.png');
+      height: 23px;
+      min-width: auto;
+      padding: 6px 4px 2px;
+      opacity: 0.9;
+      }
+      .ion-ios-tabprofil,
+      .ion-ios-tabprofil-outline,
+      .ion-md-tabprofil {
+      content: url('../assets/imgs/tabprofil.png');
+      height: 23px;
+      min-width: auto;
+      padding: 6px 4px 2px;
+      opacity: 0.9;
+      }
+      
+  }
 }

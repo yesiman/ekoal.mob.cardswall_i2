@@ -5,23 +5,23 @@
   Ionic pages and navigation.
 
 -->
-<ion-header>
+<ion-header class="light">
     <ion-navbar [color]="part.color">
       
       </ion-navbar>
   <ion-toolbar class="cust">
     <header-part [bgcolor]="part.color"  [logo]="part.logoUrl"></header-part>
     <ion-segment  *ngIf="card" [(ngModel)]="subTab" [ngStyle]="{'background-color': part.color}">
-        <ion-segment-button value="card">
+        <ion-segment-button (ionSelect)="showTab('card')" value="card">
           CARTES
         </ion-segment-button>
-        <ion-segment-button value="notes">
+        <ion-segment-button (ionSelect)="showTab('notes')" value="notes">
           NOTES
         </ion-segment-button>
-        <ion-segment-button (ionSelect)="loadMap()" value="map">
+        <ion-segment-button (ionSelect)="showTab('map')" value="map">
           INFOS
         </ion-segment-button>
-        <ion-segment-button (ionSelect)="loadOffres()" value="offers">
+        <ion-segment-button (ionSelect)="showTab('Offres')" value="offers">
           OFFRES
         </ion-segment-button>
       </ion-segment>
@@ -62,8 +62,12 @@
     </div>
     <div padding *ngIf="card && (subTab == 'offers')">
         <h1>Offres</h1>
-        <div  *ngFor="let item of items | async">
-          <button ion-button round (click)="showOffre(item)">Saisir manuellement</button>
-        </div>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3  *ngFor="let item of items | async">
+              <offre-card [offre]="item"></offre-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
     </div>
 </ion-content>

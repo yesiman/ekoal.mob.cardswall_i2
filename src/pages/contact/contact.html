@@ -1,9 +1,10 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Contact
-    </ion-title>
-  </ion-navbar>
+<ion-header class="light">
+   
+  <ion-toolbar class="cust">
+    <header-profil></header-profil>
+    
+  </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
@@ -22,9 +23,12 @@
       Réglages
     </ion-item>
     <ion-item>
-      <ion-icon name="notifications" item-left></ion-icon>
-      Notifications
+      <ion-icon name="notifications" item-start></ion-icon>
+      <ion-label>
+      Notifications</ion-label>
+      <ion-toggle item-end></ion-toggle>
     </ion-item>
+   
     <ion-item>
       <ion-icon name="text" item-left></ion-icon>
       Mentions légales

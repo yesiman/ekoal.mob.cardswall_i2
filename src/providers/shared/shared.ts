@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-
+import { Brightness } from '@ionic-native/brightness';
 /*
   Generated class for the SharedProvider provider.
 
@@ -13,8 +13,30 @@ export class SharedProvider {
   user:any = {
     logedIn:false
   };
-  constructor() {
+
+  public brightKeeper:any = -1;
+
+  constructor(private brightness: Brightness) {
     
+  }
+
+  unbright(){
+    if (this.brightKeeper != -1)
+    {
+      this.brightness.setBrightness(this.brightKeeper);
+    }
+  }
+  bright(){
+    this.brightness.getBrightness().then((brightness) => {
+        this.brightKeeper = brightness;
+    });
+    this.brightness.setBrightness(1);
+  }
+
+  getbright(){
+    this.brightness.getBrightness().then((brightness) => {
+        this.brightKeeper = brightness;
+    });
   }
 
 }

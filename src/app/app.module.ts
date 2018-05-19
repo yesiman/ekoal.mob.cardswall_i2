@@ -14,6 +14,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+import { Brightness } from '@ionic-native/brightness';
 import {
   GoogleMaps,
   GoogleMap,
@@ -37,6 +38,7 @@ import { OffrePage } from '../pages/offre/offre';
 import { PartsPage } from '../pages/parts/parts';
 import { PartPage } from '../pages/part/part';
 import { TabsPage } from '../pages/tabs/tabs';
+
 import { LoginPage } from '../pages/login/login';
 
 import { IBeacon } from '@ionic-native/ibeacon';
@@ -47,6 +49,11 @@ import { HeaderPartsComponent } from '../components/header-parts/header-parts';
 
 // Import ngx-barcode module
 import { NgxBarcodeModule } from 'ngx-barcode';
+import { OffreCardComponent } from '../components/offre-card/offre-card';
+import { HeaderOffreComponent } from '../components/header-offre/header-offre';
+import { OffresPage } from '../pages/offres/offres';
+import { HeaderProfilComponent } from '../components/header-profil/header-profil';
+import { TabsOffrePage } from '../pages/tabs-offre/tabs-offre';
 
 @NgModule({
   declarations: [
@@ -59,10 +66,15 @@ import { NgxBarcodeModule } from 'ngx-barcode';
     PartsPage,
     PartPage,
     TabsPage,
+    TabsOffrePage,
     LoginPage,
+    OffresPage,
     HomeCardComponent,
+    OffreCardComponent,
     HeaderPartComponent,
     HeaderPartsComponent,
+    HeaderOffreComponent,
+    HeaderProfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,11 +102,13 @@ import { NgxBarcodeModule } from 'ngx-barcode';
     AboutPage,
     ContactPage,
     HomePage,
+    OffresPage,
     DemoPage,
     OffrePage,
     PartsPage,
     PartPage,
     TabsPage,
+    TabsOffrePage,
     LoginPage,
   ],
   providers: [
@@ -110,7 +124,8 @@ import { NgxBarcodeModule } from 'ngx-barcode';
     UniqueDeviceID,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AsyncLogo,
-    SharedProvider
+    SharedProvider,
+    Brightness
   ]
 })
 export class AppModule {}

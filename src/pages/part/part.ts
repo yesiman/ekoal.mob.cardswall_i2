@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Slides,PanGesture, ModalController } from 'ionic-angular';
+import { NavController, NavParams, Slides,PanGesture } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { IBeacon } from '@ionic-native/ibeacon';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
@@ -35,6 +35,7 @@ export class PartPage {
   private card;
   private part;
   notesModel:String;
+  
 
   private itemAfd: AngularFirestoreDocument<any>;
   itemCard: any;
@@ -46,12 +47,12 @@ export class PartPage {
   subTab:String = "card";
 //
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private asyncLogo:AsyncLogo,private barcodeScanner: BarcodeScanner,public modalCtrl: ModalController,
+    private asyncLogo:AsyncLogo,private barcodeScanner: BarcodeScanner,
     private storage: Storage, private shar:SharedProvider,public afs: AngularFirestore, public platform: Platform) {
     this.card = navParams.get("card");
     this.part = navParams.get("part");
     platform.ready().then(() => {
-      //this.loadMap();
+     
     });
 // create a new delegate and register it with the native layer
     //let delegate = this.ibeacon.Delegate();
@@ -90,14 +91,25 @@ export class PartPage {
     
   }
 
-  showOffre(offre) {
-    var modal = this.modalCtrl.create(OffrePage,{offre:offre});
-    modal.present();  
-  }
+  ionViewWillEnter(){
+    if (this.subTab == "card")
+    {
+        this.shar.bright();
+    }
+    
+}
+
+ionViewWillLeave(){
+    
+  this.shar.unbright();
+
+
+}
+
+  
 
   addCart(bcodedatas) {
 
-    console.log("this.part",this.part);
     bcodedatas.type = bcodedatas.type.replace("_","");
 
     this.afs.collection<any>("users/"+this.shar.user.uid+"/cards").add(
@@ -121,7 +133,7 @@ export class PartPage {
          console.log('Error', err);
      });
   }
-//
+  //
   gotoSl(i) {
     this.slides.lockSwipes(false);
     this.slides.slideTo(i,200);
@@ -156,9 +168,8 @@ export class PartPage {
             this.notesModel = docSnapshot.data().notes;
           }
       });
-      
-      console.log("this.itemCard",this.itemCard);
     }
+    //Catalogues
     this.itemsCollection = this.afs.collection<any>("promos",ref => ref
       .where('part', '==', this.card.part)
     );
@@ -190,8 +201,9 @@ export class PartPage {
     //  );
   
   }
-
+  //
   loadMap(){
+      
       this.map = GoogleMaps.create('map_canvas', {
         camera: {
           target: {
@@ -206,7 +218,6 @@ export class PartPage {
     // Wait the maps plugin is ready until the MAP_READY event
     this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
       this.mapReady = true;
-
       this.map.addMarker({
         title: 'Ionic',
         icon: 'blue',
@@ -226,19 +237,24 @@ export class PartPage {
     });
   }
 
-  loadOffres() {
-
-    /*console.log("loadOffres.called");
-    this.promosCollection = this.afs.collection<any>("users");
-    this.promos = this.promosCollection.snapshotChanges().map(actions => {       
-      return actions.map(a => {
-        //let id = a.payload.doc.id;.
-        console.log("loadOffres.called.snapshotChanges");
-        let data = a.payload.doc.data();
-        data.id = a.payload.doc.id;
-        console.log(data);
-        return data;
-      });
-    });*/
+  showTab(tab) {
+    switch(tab)
+    {
+      case "card":
+        this.shar.bright();
+        break;
+      case "map":
+        this.shar.unbright();
+        this.loadMap();
+        break;
+      default:
+        this.shar.unbright();
+        if (this.map)
+        {
+          this.map.setDiv(null);
+          this.map.setVisible(false);
+        }
+        break;
+    }
   }
 }

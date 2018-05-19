@@ -1,11 +1,31 @@
+<ion-header class="light">
+    <ion-navbar [color]="part.color">
+        <ion-buttons>
+            <button ion-button icon-only (click)="closeMe()">
+              <ion-icon name="close"></ion-icon>
+              Fermer
+            </button>
+          </ion-buttons>
+          <ion-buttons end class="light">
+              <button ion-button>
+                Page {{currentPage}}/{{offre.nbpages}}
+              </button>
+            </ion-buttons>
+    </ion-navbar>
+  <ion-toolbar class="cust">
+    <header-offre [bgcolor]="part.color"  [logo]="part.logoUrl"></header-offre>
+    
+  </ion-toolbar>
+  
+</ion-header>
+
 <ion-content>
   <ion-slides pager (ionSlideDidChange)="pgChange()">
     <ion-slide  *ngFor="let pagn of parray">
-      <img [src]="pagn.src"/>
+      <ion-spinner *ngIf="!loadeds[pagn.id]"></ion-spinner>
+      <img [src]="pagn.src"  (load)="isloaded(pagn.id)"/>
     </ion-slide>
-
-    
-
   </ion-slides>
+
+
 </ion-content>
-  
