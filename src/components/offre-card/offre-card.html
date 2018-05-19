@@ -1,0 +1,4 @@
+<button  (click)="showOffre()" class="offre" ion-button>
+    <ion-spinner *ngIf="!loaded"></ion-spinner>
+    <img [src]="firstPgImg"  (load)="isloaded()"/>
+</button>
