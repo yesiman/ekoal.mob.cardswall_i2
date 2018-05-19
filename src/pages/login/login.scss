@@ -1,8 +1,16 @@
 page-login {
     ion-content {
+        text-align: center;
         .fixed-content
         {
             background-color: #00E094;
+            text-align: center;
+        }
+        #btPass {
+            margin-top:20px;
+            background-color: transparent;
+            border: none;            
+            color: #fff;
         }
     }
 }
