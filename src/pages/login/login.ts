@@ -56,6 +56,11 @@ export class LoginPage {
       this.initialise("bim-_s");
     }
   }
+  pass2() {
+    
+      this.initialise("bim-_s");
+    
+  }
   //
   loginFb() {
     //USER ID = FACEBOOK UID
