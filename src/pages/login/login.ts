@@ -48,7 +48,7 @@ export class LoginPage {
   //
   pass() {
     //USER ID = DEVICEID
-    if (this.platform.is('cordova')) {
+    if (this.platform.is('cordova') && this.uniqueDeviceID) {
       this.uniqueDeviceID.get()
       .then((uuid: any) => this.initialise(uuid))
       .catch((error: any) => console.log(error));  
