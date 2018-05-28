@@ -40,15 +40,14 @@ export class LoginPage {
       uid:uid,
       logedIn:true
     };
-      this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'});
-      var modal = this.modalCtrl.create(DemoPage,{});
-      modal.present();  
-      
+    this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'});
+    var modal = this.modalCtrl.create(DemoPage,{});
+    modal.present();    
   }
   //
   pass() {
     //USER ID = DEVICEID
-    if (this.platform.is('cordova') && this.uniqueDeviceID) {
+    if (this.platform.is('cordova')) {
       this.uniqueDeviceID.get()
       .then((uuid: any) => this.initialise(uuid))
       .catch((error: any) => console.log(error));  
