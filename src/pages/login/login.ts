@@ -56,7 +56,6 @@ export class LoginPage {
     }
   }
   pass2() {
-    
       this.initialise("bim-_s");
     
   }
